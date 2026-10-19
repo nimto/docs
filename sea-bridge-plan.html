@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<!-- 한·중·동남아 3각 브릿지 사업 구조 · 수익 모델 · 현재 단계를 정리한 단일 파일 보고서 (반응형, 인쇄 가능) -->
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>한·중·동남아 3각 브릿지 사업 구조</title>
+<meta name="description" content="한국 법인 참여와 동남아 자회사 설립 구조, 수익 모델, 현재 단계 정리">
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Noto+Serif+KR:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#FFFFFF;
+  --zone:#F1F4F2;
+  --ink:#1B2A26;
+  --green:#1E4D3D;
+  --green-soft:#E3ECE7;
+  --brass:#A8782A;
+  --muted:#5F6B66;
+  --line:#D5DDD9;
+  --hold:#8A3B2E;
+  --white:#FFFFFF;
+  --line-soft:#C9D3CD;
+  --th-bg:#FAFBFA;
+  --yes-bg:#F6F9F7;
+  --on-green-soft:#DCE8E2;
+  --on-brass-soft:#F4E7CC;
+  --print-ink:#000000;
+  --print-line:#999999;
+  --print-head:#EEEEEE;
+  --serif:"Noto Serif KR","Apple SD Gothic Neo","Malgun Gothic",serif;
+  --sans:"Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+  --measure:760px;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--sans);
+  font-size:16px;
+  line-height:1.8;
+  word-break:keep-all;
+  overflow-wrap:break-word;
+}
+a{color:var(--green);text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px}
+a:focus-visible,summary:focus-visible{outline:2px solid var(--brass);outline-offset:3px}
+h1,h2,h3,h4{font-family:var(--serif);font-weight:600;line-height:1.35;margin:0}
+p{margin:0 0 1em}
+ul,ol{margin:0 0 1em;padding-left:1.3em}
+li{margin-bottom:.35em}
+strong{font-weight:700}
+.ic{width:22px;height:22px;flex:none;stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;vertical-align:-5px}
+.ic.sm{width:18px;height:18px;vertical-align:-4px}
+
+/* 표지 */
+.cover{
+  border-bottom:1px solid var(--line);
+  background:var(--zone);
+}
+.cover-inner{
+  max-width:1100px;margin:0 auto;padding:56px 24px 48px;
+  display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:40px;align-items:center;
+}
+.cover .kicker{
+  font-family:var(--serif);font-size:15px;color:var(--green);margin-bottom:18px;
+  display:flex;align-items:center;gap:10px;
+}
+.cover .kicker::before{content:"";width:28px;height:1px;background:var(--brass)}
+.cover h1{font-size:clamp(28px,4.2vw,42px);font-weight:700;letter-spacing:-.01em;margin-bottom:14px}
+.cover h1 small{display:block;font-size:.62em;font-weight:500;color:var(--green);margin-top:10px;letter-spacing:0}
+.cover .lede{font-size:17px;color:var(--muted);max-width:34em;margin-bottom:26px}
+.meta{
+  display:grid;grid-template-columns:auto 1fr;gap:4px 16px;font-size:14px;color:var(--muted);
+  border-top:1px solid var(--line);padding-top:14px;max-width:420px;
+}
+.meta dt{color:var(--ink);font-weight:500;margin:0}
+.meta dd{margin:0}
+.tri{width:100%;max-width:480px;height:auto;display:block;margin:0 auto}
+.tri text{font-family:var(--sans)}
+.tri .frame{fill:none;stroke:var(--line-soft);stroke-width:2}
+.tri .spoke{stroke:var(--line-soft);stroke-width:1.5;stroke-dasharray:4 5}
+.tri .node{fill:var(--green)}
+.tri .hub{fill:var(--brass)}
+.tri .node-t{fill:var(--white);font-size:18px;font-weight:700;text-anchor:middle}
+.tri .node-s{fill:var(--on-green-soft);font-size:11.5px;text-anchor:middle}
+.tri .edge{fill:var(--ink);font-size:13px;text-anchor:middle;paint-order:stroke;stroke:var(--zone);stroke-width:6px;stroke-linejoin:round}
+.tri .core{fill:var(--white);font-size:14px;font-weight:700;text-anchor:middle}
+.tri .core-s{fill:var(--on-brass-soft);font-size:11px;text-anchor:middle}
+
+/* 본문 격자 */
+.page{
+  max-width:1100px;margin:0 auto;padding:40px 24px 80px;
+  display:grid;grid-template-columns:220px minmax(0,var(--measure));gap:64px;
+}
+.toc{position:sticky;top:28px;align-self:start;font-size:14px}
+.toc .toc-title{font-family:var(--serif);font-size:15px;color:var(--green);margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+.toc ol{list-style:none;padding:0;margin:0}
+.toc li{margin:0}
+.toc a{display:block;color:var(--muted);text-decoration:none;padding:5px 0 5px 12px;border-left:2px solid transparent;line-height:1.45}
+.toc a:hover,.toc a:focus-visible{color:var(--ink);border-left-color:var(--brass)}
+.toc .n{display:inline-block;width:1.6em;color:var(--brass);font-family:var(--serif)}
+.toc-m{display:none}
+
+main{min-width:0}
+.summary{
+  border-top:2px solid var(--green);border-bottom:1px solid var(--line);
+  padding:22px 0 10px;margin-bottom:48px;
+}
+.summary h2{font-size:17px;color:var(--green);margin-bottom:10px}
+.summary ul{margin:0;padding-left:1.2em}
+.summary li{margin-bottom:.5em}
+
+section.ch{margin-bottom:64px;scroll-margin-top:24px}
+.ch > h2{
+  font-size:26px;font-weight:700;letter-spacing:-.01em;
+  display:flex;align-items:baseline;gap:14px;margin-bottom:8px;
+}
+.ch > h2 .n{font-weight:500;color:var(--brass);font-size:.85em;flex:none}
+.ch > .lead{color:var(--muted);margin-bottom:28px;font-size:15.5px;padding-left:0}
+.ch > .lead::before{content:"";display:block;width:40px;height:2px;background:var(--brass);margin:12px 0 16px}
+.ch h3{font-size:19px;margin:34px 0 10px;display:flex;align-items:center;gap:9px;color:var(--green)}
+.ch h3 .ic{color:var(--brass)}
+.ch h4{font-size:16.5px;margin:22px 0 6px}
+.note{font-size:14px;color:var(--muted);border-left:2px solid var(--line);padding-left:14px;margin:18px 0}
+
+/* 세 기반 */
+.pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin:20px 0 10px}
+.pillar{border-top:2px solid var(--green);padding-top:16px}
+.pillar .head{display:flex;align-items:center;gap:9px;font-family:var(--serif);font-size:17px;font-weight:600;color:var(--green);margin-bottom:4px}
+.pillar .sub{font-size:13.5px;color:var(--muted);margin-bottom:10px}
+.pillar p{font-size:14.5px;margin:0}
+.points{margin-top:24px;padding-left:0;list-style:none}
+.points li{padding:14px 0;border-top:1px solid var(--line);display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:start}
+.points li:last-child{border-bottom:1px solid var(--line)}
+.points .ic{color:var(--brass);margin-top:5px}
+.points b{display:block;font-weight:700;margin-bottom:2px}
+.points span{font-size:14.5px;color:var(--ink)}
+
+/* 공통 표 */
+table{border-collapse:collapse;width:100%;font-size:14px;line-height:1.6;margin:14px 0 8px}
+th,td{text-align:left;vertical-align:top;padding:11px 12px;border-top:1px solid var(--line)}
+thead th{background:var(--zone);font-weight:700;border-top:2px solid var(--green);font-size:13.5px}
+tbody tr:last-child td,tbody tr:last-child th{border-bottom:1px solid var(--line)}
+tbody th{font-weight:700;background:var(--th-bg);width:17%}
+td ul{margin:0;padding-left:1.1em}
+td li{margin-bottom:.25em}
+.caption{font-size:13px;color:var(--muted);margin:6px 0 0}
+
+/* 2열 대조표 */
+.vs{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--line);margin:16px 0 6px}
+.vs > div{padding:18px 20px}
+.vs > div + div{border-left:1px solid var(--line)}
+.vs .h{display:flex;align-items:center;gap:8px;font-weight:700;margin-bottom:10px;font-family:var(--serif);font-size:16px}
+.vs .no .h{color:var(--hold)}
+.vs .yes .h{color:var(--green)}
+.vs .yes{background:var(--yes-bg)}
+.vs ul{margin:0;padding-left:1.1em;font-size:14.5px}
+
+/* 국가 비교표 */
+.cmp th.c{white-space:nowrap}
+.flag{
+  display:inline-block;font-family:var(--serif);font-weight:700;font-size:12px;letter-spacing:.04em;
+  color:var(--green);border:1px solid var(--green);border-radius:3px;padding:0 6px;line-height:20px;margin-right:6px;vertical-align:1px
+}
+.flag.hold{color:var(--hold);border-color:var(--hold)}
+.cmp td .rank{font-weight:700}
+.cmp td .rank.hold{color:var(--hold)}
+
+/* 국가별 실행 */
+.country{display:grid;grid-template-columns:150px 1fr;gap:20px;padding:22px 0;border-top:1px solid var(--line)}
+.country:last-of-type{border-bottom:1px solid var(--line)}
+.country .who{font-family:var(--serif)}
+.country .who .name{font-size:19px;font-weight:700;display:block}
+.country .who .city{font-size:13.5px;color:var(--muted);display:block;margin-top:2px}
+.country .who .role{font-size:13px;color:var(--green);display:block;margin-top:10px;line-height:1.5}
+.country .who .role.hold{color:var(--hold)}
+.country h4{margin:0 0 6px;font-size:16.5px}
+.country p{margin:0;font-size:15px}
+
+/* 두 구상 */
+.plans{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-top:8px}
+.plan{border-top:2px solid var(--green);padding-top:14px}
+.plan.alt{border-top-color:var(--brass)}
+.plan .tag{font-size:13px;color:var(--muted);margin-bottom:4px}
+.plan h4{margin:0 0 8px;font-size:17px}
+.plan p{font-size:14.5px;margin:0}
+
+/* 수익 모델 */
+.rev th.item{width:22%}
+.rev td .price{font-weight:700;white-space:nowrap}
+.formula{
+  background:var(--zone);border-left:3px solid var(--brass);padding:16px 18px;margin:18px 0;
+  font-size:14.5px;
+}
+.formula .f{font-family:var(--serif);font-size:16px;margin:4px 0 8px;letter-spacing:.01em}
+.formula ul{margin:6px 0 0;padding-left:1.2em;font-size:14px}
+.status{display:grid;grid-template-columns:auto 1fr;gap:10px 14px;border:1px solid var(--line);padding:16px 18px;margin:14px 0 20px;font-size:14.5px}
+.status .ic{color:var(--brass);margin-top:4px}
+.status b{display:block}
+
+/* 단계 */
+.steps{list-style:none;padding:0;margin:14px 0 0;counter-reset:step}
+.steps li{counter-increment:step;display:grid;grid-template-columns:44px 1fr;gap:14px;padding:16px 0;border-top:1px solid var(--line)}
+.steps li:last-child{border-bottom:1px solid var(--line)}
+.steps li::before{
+  content:counter(step);font-family:var(--serif);font-size:22px;font-weight:600;color:var(--brass);line-height:1.1;padding-top:2px
+}
+.steps b{display:flex;align-items:center;gap:8px;font-size:16px;margin-bottom:3px}
+.steps b .ic{color:var(--green)}
+.steps p{margin:0;font-size:14.5px;color:var(--ink)}
+.steps .now{font-size:12.5px;color:var(--green);border:1px solid var(--green);border-radius:3px;padding:0 6px;line-height:19px;margin-left:4px;font-weight:500}
+
+/* 정리 */
+.wrap-up ol{padding-left:1.4em}
+.wrap-up li{margin-bottom:.9em}
+.wrap-up li b{font-weight:700}
+
+footer.src{border-top:1px solid var(--line);margin-top:24px;padding-top:18px;font-size:13px;color:var(--muted)}
+footer.src p{margin:0 0 .4em}
+
+@media (max-width:1023px){
+  .page{grid-template-columns:1fr;gap:0;padding-top:28px}
+  .toc{display:none}
+  .toc-m{display:block;margin-bottom:34px;border:1px solid var(--line);font-size:14.5px}
+  .toc-m summary{cursor:pointer;padding:12px 16px;font-family:var(--serif);color:var(--green);font-weight:600;list-style:none;display:flex;align-items:center;justify-content:space-between}
+  .toc-m summary::-webkit-details-marker{display:none}
+  .toc-m summary::after{content:"열기";font-family:var(--sans);font-size:13px;font-weight:400;color:var(--muted)}
+  .toc-m[open] summary::after{content:"닫기"}
+  .toc-m ol{list-style:none;margin:0;padding:4px 16px 12px}
+  .toc-m a{display:block;padding:8px 0;color:var(--ink);text-decoration:none;border-top:1px solid var(--line)}
+  .toc-m .n{display:inline-block;width:1.6em;color:var(--brass);font-family:var(--serif)}
+  .cover-inner{grid-template-columns:1fr;gap:30px;padding:40px 24px 36px}
+  .tri{max-width:420px}
+  .pillars{grid-template-columns:1fr;gap:22px}
+  .plans{grid-template-columns:1fr;gap:26px}
+}
+@media (max-width:720px){
+  body{font-size:15.5px}
+  .cover h1{font-size:clamp(26px,7.2vw,34px)}
+  .cover .lede{font-size:16px}
+  .ch > h2{font-size:23px}
+  .vs{grid-template-columns:1fr}
+  .vs > div + div{border-left:0;border-top:1px solid var(--line)}
+  .country{grid-template-columns:1fr;gap:10px}
+  .country .who .role{margin-top:4px}
+  /* 표를 블록으로 */
+  table.blk,table.blk tbody,table.blk tr,table.blk th,table.blk td{display:block;width:auto}
+  table.blk thead{display:none}
+  table.blk tr{border:1px solid var(--line);margin-bottom:14px}
+  table.blk tbody th{border-top:0;background:var(--zone);font-size:15px;padding:12px 14px}
+  table.blk td{border-top:1px solid var(--line);padding:10px 14px 12px}
+  table.blk td::before{content:attr(data-h);display:block;font-size:12.5px;color:var(--muted);margin-bottom:3px;font-weight:500}
+  table.blk tbody tr:last-child td{border-bottom:0}
+  .status{grid-template-columns:auto 1fr}
+}
+@media print{
+  body{font-size:12pt;color:var(--print-ink)}
+  .cover{background:var(--white);border-bottom:1px solid var(--print-line)}
+  .cover-inner{grid-template-columns:1fr 1fr;padding:0 0 24px}
+  .page{display:block;padding:24px 0}
+  .toc,.toc-m{display:none}
+  section.ch{break-inside:avoid-page;margin-bottom:36px}
+  .country,.plan,.steps li{break-inside:avoid}
+  a{color:inherit;text-decoration:none}
+  thead th{background:var(--print-head)}
+}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-landmark" viewBox="0 0 24 24"><path d="M3 21h18M5 21V10M9 21V10M15 21V10M19 21V10M3 10l9-6 9 6H3z"/></symbol>
+  <symbol id="i-code" viewBox="0 0 24 24"><path d="M8 7l-5 5 5 5M16 7l5 5-5 5M14 4l-4 16"/></symbol>
+  <symbol id="i-qr" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3zM20 14h1v1M17 20h1M20 18v3h1"/></symbol>
+  <symbol id="i-receipt" viewBox="0 0 24 24"><path d="M6 3h12v18l-2-1.5L14 21l-2-1.5L10 21l-2-1.5L6 21V3z"/><path d="M9 15l6-6"/><circle cx="9.5" cy="9.5" r="1"/><circle cx="14.5" cy="14.5" r="1"/></symbol>
+  <symbol id="i-exchange" viewBox="0 0 24 24"><path d="M4 8h14l-3-3M20 16H6l3 3"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s-6-5.3-6-11a6 6 0 0112 0c0 5.7-6 11-6 11z"/><circle cx="12" cy="10" r="2.2"/></symbol>
+  <symbol id="i-store" viewBox="0 0 24 24"><path d="M3 9l1.5-5h15L21 9M3 9v11h18V9M3 9a3 3 0 006 0 3 3 0 006 0 3 3 0 006 0M9 20v-6h6v6"/></symbol>
+  <symbol id="i-megaphone" viewBox="0 0 24 24"><path d="M3 10v4h3l8 5V5L6 10H3zM17 9a4 4 0 010 6"/></symbol>
+  <symbol id="i-map" viewBox="0 0 24 24"><path d="M9 4L3 6v14l6-2 6 2 6-2V4l-6 2-6-2zM9 4v14M15 6v14"/></symbol>
+  <symbol id="i-package" viewBox="0 0 24 24"><path d="M12 3l9 4.5v9L12 21l-9-4.5v-9L12 3zM3 7.5l9 4.5 9-4.5M12 12v9"/></symbol>
+  <symbol id="i-tag" viewBox="0 0 24 24"><path d="M3 12V4h8l10 10-8 8L3 12z"/><circle cx="7.5" cy="8.5" r="1.3"/></symbol>
+  <symbol id="i-scale" viewBox="0 0 24 24"><path d="M12 3v18M5 21h14M12 6l-6 2M12 6l6 2M3 14l3-6 3 6a3 3 0 01-6 0zM15 14l3-6 3 6a3 3 0 01-6 0z"/></symbol>
+  <symbol id="i-idcard" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="8.5" cy="11" r="2"/><path d="M5.5 16c.5-1.8 1.6-2.5 3-2.5s2.5.7 3 2.5M14 10h4M14 14h4"/></symbol>
+  <symbol id="i-cup" viewBox="0 0 24 24"><path d="M4 8h13v6a5 5 0 01-5 5H9a5 5 0 01-5-5V8zM17 9h2a2 2 0 010 4h-2M8 3v2M11 3v2M14 3v2"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12l4.5 4.5L19 7"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
+  <symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-5.5 6-5.5s6 2.2 6 5.5M16 4.5a3.2 3.2 0 010 6.4M21 20c0-2.6-1.6-4.5-4-5.2"/></symbol>
+  <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 20V4M4 20h16M8 15l4-5 3 3 5-7"/></symbol>
+  <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3.2 3 14.8 0 18M12 3c-3 3.2-3 14.8 0 18"/></symbol>
+  <symbol id="i-doc" viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6V3zM15 3v4h4M9 12h6M9 16h6"/></symbol>
+  <symbol id="i-truck" viewBox="0 0 24 24"><path d="M3 6h11v10H3zM14 10h4l3 3v3h-7"/><circle cx="7" cy="18" r="1.8"/><circle cx="17" cy="18" r="1.8"/></symbol>
+</svg>
+
+<header class="cover">
+  <div class="cover-inner">
+    <div>
+      <div class="kicker">사업 구조 제안서</div>
+      <h1>한·중·동남아 3각 브릿지<small>한국 법인 참여와 동남아 자회사 설립 구조, 수익 모델, 현재 단계</small></h1>
+      <p class="lede">한국 영주권, 중국 국적, 10년 이상의 한·중 IT 개발 경력이라는 세 가지 기반을 한 사람이 가지고 있다는 점에서 출발합니다. 이 배경으로 한국 법인에 참여해 동남아 자회사를 세우고 운영하는 구조를 설명합니다.</p>
+      <dl class="meta">
+        <dt>작성</dt><dd>이사한</dd>
+        <dt>기준일</dt><dd>2026년 10월 20일</dd>
+        <dt>상태</dt><dd>초안. 수익 단가는 현지 마케팅팀 미팅 후 조정 예정</dd>
+      </dl>
+    </div>
+    <div>
+      <svg class="tri" viewBox="0 0 480 400" role="img" aria-labelledby="tri-title tri-desc">
+        <title id="tri-title">한국, 중화권, 동남아를 잇는 삼각 구조</title>
+        <desc id="tri-desc">세 꼭짓점은 한국(F-5 영주권), 중화권(IT 개발력과 화교 네트워크), 동남아(결제 연동과 현지 실행)이고, 가운데에 플랫폼과 자회사가 있습니다.</desc>
+        <polygon class="frame" points="240,66 80,330 400,330"/>
+        <line class="spoke" x1="240" y1="66" x2="240" y2="240"/>
+        <line class="spoke" x1="80" y1="330" x2="240" y2="240"/>
+        <line class="spoke" x1="400" y1="330" x2="240" y2="240"/>
+        <text class="edge" x="138" y="196">직접 개발 · IP 보유</text>
+        <text class="edge" x="346" y="196">정품 소싱 · 역직구</text>
+        <text class="edge" x="240" y="368">화교 물류 · 상공회 네트워크</text>
+        <circle class="hub" cx="240" cy="240" r="40"/>
+        <text class="core" x="240" y="237">플랫폼</text>
+        <text class="core-s" x="240" y="253">동남아 자회사</text>
+        <circle class="node" cx="240" cy="66" r="52"/>
+        <text class="node-t" x="240" y="60">한국</text>
+        <text class="node-s" x="240" y="78">F-5 영주권</text>
+        <text class="node-s" x="240" y="93">법인 참여</text>
+        <circle class="node" cx="80" cy="330" r="52"/>
+        <text class="node-t" x="80" y="324">중화권</text>
+        <text class="node-s" x="80" y="342">IT 개발력</text>
+        <text class="node-s" x="80" y="357">화교 네트워크</text>
+        <circle class="node" cx="400" cy="330" r="52"/>
+        <text class="node-t" x="400" y="324">동남아</text>
+        <text class="node-s" x="400" y="342">결제 연동</text>
+        <text class="node-s" x="400" y="357">현지 실행</text>
+      </svg>
+    </div>
+  </div>
+</header>
+
+<div class="page">
+  <nav class="toc" aria-label="목차">
+    <div class="toc-title">차례</div>
+    <ol>
+      <li><a href="#s1"><span class="n">1</span>세 가지 기반</a></li>
+      <li><a href="#s2"><span class="n">2</span>한국 컨트롤타워 구상</a></li>
+      <li><a href="#s3"><span class="n">3</span>동남아 4개국 비교</a></li>
+      <li><a href="#s4"><span class="n">4</span>국가별 실행 방식</a></li>
+      <li><a href="#s5"><span class="n">5</span>법인 구조 두 가지 선택지</a></li>
+      <li><a href="#s6"><span class="n">6</span>수익 모델</a></li>
+      <li><a href="#s7"><span class="n">7</span>손익분기와 투자</a></li>
+      <li><a href="#s8"><span class="n">8</span>현재 단계와 우선순위</a></li>
+      <li><a href="#s9"><span class="n">9</span>정리</a></li>
+    </ol>
+  </nav>
+
+  <main>
+    <details class="toc-m">
+      <summary>차례</summary>
+      <ol>
+        <li><a href="#s1"><span class="n">1</span>세 가지 기반</a></li>
+        <li><a href="#s2"><span class="n">2</span>한국 컨트롤타워 구상</a></li>
+        <li><a href="#s3"><span class="n">3</span>동남아 4개국 비교</a></li>
+        <li><a href="#s4"><span class="n">4</span>국가별 실행 방식</a></li>
+        <li><a href="#s5"><span class="n">5</span>법인 구조 두 가지 선택지</a></li>
+        <li><a href="#s6"><span class="n">6</span>수익 모델</a></li>
+        <li><a href="#s7"><span class="n">7</span>손익분기와 투자</a></li>
+        <li><a href="#s8"><span class="n">8</span>현재 단계와 우선순위</a></li>
+        <li><a href="#s9"><span class="n">9</span>정리</a></li>
+      </ol>
+    </details>
+
+    <div class="summary">
+      <h2>요약</h2>
+      <ul>
+        <li>기존 한국 법인에 참여해 국내외 자회사 설립을 전담합니다. 한국 법인이 모회사가 되어 동남아 자회사에 해외직접투자(FDI)를 하는 구조입니다.</li>
+        <li>한국 정품을 역직구로 수출하면 매입 부가세 10%를 전액 환급받습니다. 이 환급금이 공동구매 특가의 재원입니다.</li>
+        <li>캄보디아는 100% 단독 자회사, 필리핀은 60:40 합작, 베트남은 현지 파트너와 내국법인, 태국은 보류합니다.</li>
+        <li>수익은 브랜드 판매운영 계약료와 수수료, 현지몰 광고, 동네지도, 구매·검수·합배송 구독, 중고마켓 광고의 다섯 갈래입니다.</li>
+        <li>지금 단계의 우선순위는 정식 비자, 회사 명의의 작은 사무실, 현지 마케팅팀 미팅, 손익분기 모델, 투자 자료 순입니다.</li>
+      </ul>
+    </div>
+
+    <!-- 1 -->
+    <section class="ch" id="s1">
+      <h2><span class="n">1</span>세 가지 기반</h2>
+      <p class="lead">한국, 중화권, 동남아에 각각 발을 딛고 있는 개인적 배경을 한국 법인과 결합해 시너지를 내는 방식입니다.</p>
+
+      <div class="pillars">
+        <div class="pillar">
+          <div class="head"><svg class="ic"><use href="#i-landmark"/></svg>한국 기반</div>
+          <div class="sub">법인 참여, 자회사·소싱 담당</div>
+          <p>한국 장기 체류 영주권자(F-5)로서 한국 법인에 임원·주주·실무 책임자로 합류하고, 국내외 자회사 설립과 수출입·플랫폼 사업 세팅을 제약 없이 맡을 수 있습니다.</p>
+        </div>
+        <div class="pillar">
+          <div class="head"><svg class="ic"><use href="#i-code"/></svg>중화권 기반</div>
+          <div class="sub">IT 개발력, 화교 네트워크</div>
+          <p>중국 국적과 10년 이상의 한·중 IT·시스템 개발 경력을 바탕으로, 베트남·캄보디아 상권을 쥐고 있는 화교 자본과 물류·통관 라인, 현지 중국계 상공회를 유리하게 연결합니다.</p>
+        </div>
+        <div class="pillar">
+          <div class="head"><svg class="ic"><use href="#i-qr"/></svg>동남아 기반</div>
+          <div class="sub">결제 연동, 현지 실행</div>
+          <p>호치민 벤탄 데모가 이미 완성되어 있고, 필리핀 핀테크(GCash, Maya, QR Ph) 경험과 캄보디아 KHQR(바콩) 연동 역량이 있어 빠른 오픈이 가능합니다.</p>
+        </div>
+      </div>
+
+      <ul class="points">
+        <li><svg class="ic"><use href="#i-landmark"/></svg><div><b>한국 법인 참여와 자회사 설립 전담</b><span>영주권자로서 한국 법인에 합류해 국내외 자회사 설립, 수출입과 플랫폼 사업 세팅을 자유롭게 담당할 수 있습니다.</span></div></li>
+        <li><svg class="ic"><use href="#i-store"/></svg><div><b>한국 공식 브랜드 정품 소싱 실무</b><span>올리브영, 무신사, 다이소, 약국 화장품 등 동남아에서 인기가 높은 한국 정품 재고를 한국 법인과 자회사 체계를 통해 매입하고 발송합니다.</span></div></li>
+        <li><svg class="ic"><use href="#i-code"/></svg><div><b>10년 이상의 IT·플랫폼 직접 개발 역량</b><span>외주에 기대지 않고 이커머스 플랫폼, C2C 거래 구조, 정산과 결제 시스템을 직접 개발·구축합니다. 초기 시행착오와 개발 비용을 크게 줄입니다.</span></div></li>
+        <li><svg class="ic"><use href="#i-truck"/></svg><div><b>화교 물류·상공회 네트워크 활용</b><span>중국 국적자의 언어·문화적 유대감으로 베트남·캄보디아의 화교 자본, 물류 통관 라인, 중국계 상공회 네트워크를 협력 관계로 끌어옵니다.</span></div></li>
+        <li><svg class="ic"><use href="#i-qr"/></svg><div><b>준비된 데모와 현지 결제 연동 경험</b><span>호치민 벤탄 데모가 완성되어 있고, 필리핀 핀테크 경험과 캄보디아 KHQR 연동 역량을 갖추고 있어 빠른 오픈이 가능합니다.</span></div></li>
+        <li><svg class="ic"><use href="#i-users"/></svg><div><b>화교 상권과 한인 상권의 동시 연결</b><span>동남아 현지의 탄탄한 화교 유통·물류망과 호치민 10만 한인 교민 상권을 함께 연결하는 실속 있는 사업 구조를 만듭니다.</span></div></li>
+      </ul>
+    </section>
+
+    <!-- 2 -->
+    <section class="ch" id="s2">
+      <h2><span class="n">2</span>한국 컨트롤타워 구상</h2>
+      <p class="lead">기존 한국 법인에 참여해 자회사 설립을 담당함으로써 부가세 10% 환급을 확보하고, 중국 국적자의 해외 송금·행정 불편을 없애는 이유입니다.</p>
+
+      <h3><svg class="ic"><use href="#i-landmark"/></svg>기존 한국 법인 참여와 자회사 세팅 구조</h3>
+      <p>이미 운영되고 있는 (주)XXX 한국 법인에 참여하여, 해당 법인에 '무역업(전자상거래 수출)'과 '글로벌 플랫폼 서비스업' 업종을 추가하거나 산하에 한국 자회사와 해외 자회사를 설립·운영하는 담당자 역할을 맡는 구조를 원합니다.</p>
+      <p>직접 개발한 플랫폼 소프트웨어(IP)와 한국 상품 매입·수출 창구를 한국 법인 또는 산하 자회사에 두어 전체 글로벌 사업의 컨트롤타워로 삼습니다.</p>
+
+      <h3><svg class="ic"><use href="#i-receipt"/></svg>부가가치세 영세율 환급으로 확보하는 10% 마진</h3>
+      <p>한국 법인 또는 자회사를 통해 올리브영·무신사·다이소·약국 화장품을 매입해 베트남·캄보디아·필리핀 소비자에게 역직구(목록통관 또는 정식수출)로 발송하면 정식 수출 실적으로 인정받습니다. 매입 시 부담한 부가가치세 10%를 전액 환급받습니다.</p>
+      <p>개인 보따리상이나 비공식 리셀러는 환급받지 못하는 이 10%가 공동구매 특가 경쟁력을 만드는 핵심 재원이 됩니다.</p>
+
+      <h3><svg class="ic"><use href="#i-exchange"/></svg>개인 직접 투자 대신 법인 참여 구조를 택하는 이유</h3>
+      <p>중국 국적 개인 명의로 동남아에 직접 투자해 법인을 세우면 중국 외환관리국(SAFE)의 자금 반출 규정, 현지 비자 발급, 은행 계좌 개설 과정에서 불필요하고 까다로운 행정 절차가 생깁니다.</p>
+      <p>반면 한국 영주권자로서 참여한 한국 법인이 모회사가 되어 베트남·캄보디아·필리핀 자회사에 해외직접투자(FDI)를 하고, 자회사 설립과 운영 담당자로 나서는 구조를 취하면 한국 외국환거래법에 따라 자금을 송금할 수 있습니다. 현지에서 번 수익도 배당과 소프트웨어 사용료(로열티) 형태로 한국 법인에 막힘없이 회수합니다.</p>
+
+      <div class="vs">
+        <div class="no">
+          <div class="h"><svg class="ic"><use href="#i-x"/></svg>개인(중국 국적) 명의로 직접 투자·설립</div>
+          <ul>
+            <li>중국 외환관리국(SAFE) 자금 반출 규정 등 외환 이동의 제약</li>
+            <li>동남아 현지 비자 발급과 은행 계좌 개설 시 중국 국적 개인에 대한 불필요한 행정 절차</li>
+            <li>국가별 자금 송금과 수익 회수 절차가 개인 단위로 쪼개져 관리가 복잡함</li>
+          </ul>
+        </div>
+        <div class="yes">
+          <div class="h"><svg class="ic"><use href="#i-check"/></svg>한국 법인에 참여해 산하 자회사(FDI) 설립·담당</div>
+          <ul>
+            <li>한국 법인이 모회사가 되어 한국 외국환거래법에 따라 동남아 자회사에 해외직접투자(FDI)로 자금 송금</li>
+            <li>자회사 설립·운영 담당자로서 현지 세팅·개발·네트워크를 전담하고, 수익은 배당금과 소프트웨어 로열티로 한국 법인에 정식 회수</li>
+            <li>한국 법인의 수출 실적으로 매입 부가세 10% 영세율 환급까지 동시에 확보</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3 -->
+    <section class="ch" id="s3">
+      <h2><span class="n">3</span>동남아 4개국 비교</h2>
+      <p class="lead">국가별 단독 설립 난이도, 현지인 합작 시의 실익, 결제·통관 강점, 한국 법인을 배제할 때의 최적 역할을 비교합니다.</p>
+      <p>동남아는 나라마다 외국인(외투법인) 단독 설립 시 요구하는 자본금과 허가 기간이 크게 다릅니다. 무조건 100% 단독 설립만 고집하기보다, 100% 단독 자회사가 유리한 곳(캄보디아)과 현지인 합작이나 파트너십으로 자본금·기간을 아끼는 곳(필리핀·베트남)을 구분해 현실적으로 세팅하고자 합니다.</p>
+
+      <table class="cmp blk">
+        <thead>
+          <tr>
+            <th class="c">국가</th>
+            <th>단독(외국인 100%) 설립</th>
+            <th>현지인 합작(JV) 효과</th>
+            <th>결제·통관·시장 강점</th>
+            <th>한국 법인 배제 시 역할</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th><span class="flag">KH</span>캄보디아<br><small style="font-weight:400;color:var(--muted)">프놈펜</small></th>
+            <td data-h="단독 설립"><span class="rank">가장 쉬움.</span> 외국 측 100% 지분으로 이커머스·유통·IT 법인을 2~4주 내 즉시 설립</td>
+            <td data-h="현지인 합작">단독 100%로 충분. 현지인에게 지분을 줄 필요 없고 대관·영업 시에만 협업</td>
+            <td data-h="결제·통관·시장"><ul><li>달러(USD) 경제권, 외환 자유</li><li>KHQR(바콩) 결제 연동 용이</li><li>화교 상권과 한인 상권이 결합된 블루오션</li></ul></td>
+            <td data-h="한국 법인 배제 시 역할">글로벌 컨트롤타워 본사(New HQ), 고마진 O2O 거점</td>
+          </tr>
+          <tr>
+            <th><span class="flag">PH</span>필리핀<br><small style="font-weight:400;color:var(--muted)">마닐라 · 클라크</small></th>
+            <td data-h="단독 설립"><span class="rank">매우 어려움.</span> 약 6억 원(2,500만 PHP) 또는 IT 최소 20만 자본금 필요</td>
+            <td data-h="현지인 합작"><span class="rank">규제 완전 돌파.</span> 필리핀인 60% : 우리 측 40%로 설립 시 외투 자본금 규제 면제, 약 100만~300만 원 소액으로 즉시 설립</td>
+            <td data-h="결제·통관·시장"><ul><li>영어 UI 즉시 오픈 가능</li><li>10,000 PHP(약 24만 원) 소액면세</li><li>필리핀 핀테크(GCash, Maya, QR Ph) 경험 직결</li></ul></td>
+            <td data-h="한국 법인 배제 시 역할">현지인 합작(60:40) 기반 대규모 K-직구와 안심 C2C 확장 거점</td>
+          </tr>
+          <tr>
+            <th><span class="flag">VN</span>베트남<br><small style="font-weight:400;color:var(--muted)">호치민</small></th>
+            <td data-h="단독 설립"><span class="rank">소매업 어려움.</span> 100% 외투 시 마켓플레이스(MOIT)와 유통(소매) 허가에 6~12개월 이상 소요</td>
+            <td data-h="현지인 합작"><span class="rank">속도 극대화.</span> 베트남인 51%~100% 내국법인으로 설립 시 2주 내 법인 완성, MOIT와 로컬 PG 즉시 연동</td>
+            <td data-h="결제·통관·시장"><ul><li>호치민 벤탄 데모 완성</li><li>K-뷰티 직구와 리셀 수요가 큼</li><li>호치민 10만 한인 교민 상권</li></ul></td>
+            <td data-h="한국 법인 배제 시 역할">즉시 트래픽 검증(CBT)과 현지인 파트너 기반 로컬 확장 거점</td>
+          </tr>
+          <tr>
+            <th><span class="flag hold">TH</span>태국<br><small style="font-weight:400;color:var(--muted)">방콕</small></th>
+            <td data-h="단독 설립"><span class="rank hold">매우 어려움.</span> 외국인 지분 49% 제한(FBA), BOI 특례 없이는 단독 이커머스 불가</td>
+            <td data-h="현지인 합작"><span class="rank hold">주의 필요.</span> 태국인 51% 차명(Nominee) 구조에 대한 태국 정부의 형사 단속이 매우 엄격</td>
+            <td data-h="결제·통관·시장"><ul><li>쇼피·틱톡샵 독과점으로 초기 마케팅비 과다</li><li>태국 FDA 통관 단속 극심</li></ul></td>
+            <td data-h="한국 법인 배제 시 역할"><span class="rank hold">진입 보류 (4순위)</span></td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="caption">자본금·허가 기간은 작성 시점 기준이며, 실제 설립 전 현지 법무 확인이 필요합니다.</p>
+    </section>
+
+    <!-- 4 -->
+    <section class="ch" id="s4">
+      <h2><span class="n">4</span>국가별 실행 방식</h2>
+      <p class="lead">준비된 결과물과 현지 여건을 고려해 가장 무리 없이, 빠르게 안착하는 방법입니다.</p>
+
+      <div class="country">
+        <div class="who"><span class="name"><span class="flag">VN</span>베트남</span><span class="city">호치민</span><span class="role">완성된 데모로 가장 먼저 트래픽 검증</span></div>
+        <div>
+          <h4>현지 파트너와 내국법인으로 2주 안에 서비스 시작</h4>
+          <p>호치민 벤탄 데모가 이미 완성되어 있고, K-뷰티 직구·리셀 수요와 호치민 10만 한인 교민 상권이 잘 형성되어 있습니다. 외투 100%로 세우려면 MOIT 허가에만 6~12개월이 걸려 시간을 허비하게 됩니다. 현지 파트너와 함께 베트남 내국법인(51%~100%) 형태로 2주 내에 법인과 로컬 PG를 연동해 바로 서비스(CBT)를 돌리는 것이 가장 효율적입니다.</p>
+        </div>
+      </div>
+      <div class="country">
+        <div class="who"><span class="name"><span class="flag">PH</span>필리핀</span><span class="city">마닐라 · 클라크</span><span class="role">소액 합작과 핀테크 경험을 살린 K-직구·C2C 거점</span></div>
+        <div>
+          <h4>필리핀인 60% : 우리 측 40% 합작으로 자본금 부담 해소</h4>
+          <p>외국 측 단독으로 소매 법인을 내려면 약 6억 원의 큰 자본금이 묶입니다. 신뢰할 수 있는 필리핀인 60% : 우리 측 40% 합작(JV)으로 접근하면 외투 자본금 규제가 면제되어 100만~300만 원의 소액으로 즉시 법인을 세울 수 있습니다. 영어 UI로 바로 오픈할 수 있고 10,000 PHP(약 24만 원) 소액면세 통관이 유리합니다. 무엇보다 필리핀 핀테크(GCash, Maya, QR Ph) 경험을 그대로 접목할 수 있어 대규모 K-직구와 안심 C2C 확장 거점으로 삼기에 가장 좋습니다.</p>
+        </div>
+      </div>
+      <div class="country">
+        <div class="who"><span class="name"><span class="flag">KH</span>캄보디아</span><span class="city">프놈펜</span><span class="role">지분 100% 완전 소유, 달러 기반 핵심 자회사</span></div>
+        <div>
+          <h4>2~4주 안에 100% 자회사, 고마진 O2O 거점이자 해외 본사</h4>
+          <p>외국 측 100% 지분으로 2~4주 내에 이커머스·유통·IT 법인을 바로 세울 수 있어 현지인에게 지분을 나눌 필요가 없고 대관·영업 시에만 협업하면 됩니다. 달러(USD) 경제권이라 외환 이동이 자유롭고 KHQR(바콩) 결제 연동이 용이하며, 화교 상권과 한인 상권이 결합된 블루오션이어서 고마진 O2O 거점과 해외 본사 역할로 가장 알맞습니다.</p>
+        </div>
+      </div>
+      <div class="country">
+        <div class="who"><span class="name"><span class="flag hold">TH</span>태국</span><span class="city">방콕</span><span class="role hold">현시점 보류 (4순위)</span></div>
+        <div>
+          <h4>무리하게 들어가지 않습니다</h4>
+          <p>외국인 지분 제한(49%)과 태국 정부의 엄격한 차명(Nominee) 형사 단속이 부담스럽고, 태국 FDA 통관 단속과 쇼피·틱톡샵 독과점으로 인한 초기 마케팅비 소모가 큽니다. 현시점에서는 제외(4순위)하는 것이 맞다고 봅니다.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5 -->
+    <section class="ch" id="s5">
+      <h2><span class="n">5</span>법인 구조 두 가지 선택지</h2>
+      <p class="lead">한국 법인을 구조에 포함하는지에 따라 두 가지 구상을 둡니다. 기본 방향은 구상 1입니다.</p>
+      <div class="plans">
+        <div class="plan">
+          <div class="tag">구상 1 · 기본 방향</div>
+          <h4>기존 한국 법인에 참여해 자회사 설립을 담당</h4>
+          <p>기존 한국 법인((주)XXX)에 합류해 국내 자회사(또는 수출·플랫폼 사업부)와 동남아 해외 자회사 설립을 전담하는 구조입니다. 한국 법인을 모회사로 두어 한국 정품 소싱과 부가세 10% 환급을 챙기고, 한국 법인이 동남아 자회사들에 해외직접투자(FDI)를 진행합니다. 중국 국적 개인 송금의 번거로움을 없애고, 배당과 소프트웨어 사용료로 수익을 깔끔하게 회수합니다.</p>
+        </div>
+        <div class="plan alt">
+          <div class="tag">구상 2 · 한국 법인을 배제해야 할 경우</div>
+          <h4>캄보디아 법인을 글로벌 본사로</h4>
+          <p>여건상 한국 법인을 구조에서 빼고 동남아 현지만으로 묶어야 한다면, 외국인 100% 단독 설립이 가능하고 달러(USD) 사용과 외환 이동이 자유로운 캄보디아 법인을 글로벌 컨트롤타워 본사(New HQ)로 세웁니다. 여기에 필리핀(60:40 합작 거점)과 베트남(즉시 트래픽 검증과 로컬 확장 거점)을 연결해 운영합니다.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6 -->
+    <section class="ch" id="s6">
+      <h2><span class="n">6</span>수익 모델</h2>
+      <p class="lead">플랫폼이 돈을 버는 다섯 갈래입니다. 아래 단가는 2026년 10월 18일 기준 개인 의견이며, 현지 마케팅팀과 실제 미팅을 거쳐 조정합니다.</p>
+
+      <table class="rev blk">
+        <thead>
+          <tr><th class="item">항목</th><th>대상</th><th>과금 방식</th><th>비고</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th><svg class="ic sm"><use href="#i-store"/></svg> 한국 브랜드 입점</th>
+            <td data-h="대상">동남아 현지몰에 입점하는 한국 브랜드</td>
+            <td data-h="과금 방식"><span class="price">월 $199</span> 판매운영 계약료 + 완료 주문 상품금액의 <span class="price">5%</span></td>
+            <td data-h="비고">평균 상품금액 $40 가정. 주문 1건당 수수료 $2</td>
+          </tr>
+          <tr>
+            <th><svg class="ic sm"><use href="#i-megaphone"/></svg> 현지몰 광고</th>
+            <td data-h="대상">현지몰에 노출을 원하는 업체</td>
+            <td data-h="과금 방식"><span class="price">$49 · $99 · $199</span> 예산형</td>
+            <td data-h="비고">업체당 실제 집행액 평균 $99 목표</td>
+          </tr>
+          <tr>
+            <th><svg class="ic sm"><use href="#i-map"/></svg> 동네지도</th>
+            <td data-h="대상">현지 사업자</td>
+            <td data-h="과금 방식">기본 등록 무료, 사업자 관리 기능 <span class="price">월 $12</span></td>
+            <td data-h="비고">무료 등록으로 지도를 채우고 관리 기능으로 전환</td>
+          </tr>
+          <tr>
+            <th><svg class="ic sm"><use href="#i-package"/></svg> 구매·검수·합배송 구독</th>
+            <td data-h="대상">한국 상품을 직구하는 개인</td>
+            <td data-h="과금 방식"><span class="price">월 $9.90</span></td>
+            <td data-h="비고">사용량 제한 있음. 국제운임 별도</td>
+          </tr>
+          <tr>
+            <th><svg class="ic sm"><use href="#i-tag"/></svg> 중고마켓 외부광고</th>
+            <td data-h="대상">광고 네트워크</td>
+            <td data-h="과금 방식">실제 광고 수취액으로 정산</td>
+            <td data-h="비고">트래픽에 비례. 초기에는 보조 수익</td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="caption">출처: 2026년 10월 18일 이사한 메모. "개인 생각이고 현지 마케팅팀들하고 실제 미팅을 가져봐야 할 것 같습니다."</p>
+
+      <div class="formula">
+        <b>브랜드 1곳의 월 수익(단위 경제)</b>
+        <div class="f">$199 + 완료 주문 수 × $40 × 5% = $199 + 주문 수 × $2</div>
+        <ul>
+          <li>월 완료 주문 50건이면 $299, 100건이면 $399입니다. 주문 수와 평균 상품금액은 가정이며 실측 전입니다.</li>
+          <li>광고($99)와 동네지도($12), 구독($9.90)은 주문량과 무관한 반복 수익이라 손익분기 계산의 기둥이 됩니다.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 7 -->
+    <section class="ch" id="s7">
+      <h2><span class="n">7</span>손익분기와 투자</h2>
+      <p class="lead">손익분기를 맞춰야 하지만, 투자 심사에 낼 수 있는 수준의 재무 자료는 아직 준비되지 않았습니다. 현재 상태를 있는 그대로 적습니다.</p>
+
+      <div class="status">
+        <svg class="ic"><use href="#i-scale"/></svg>
+        <div><b>손익분기 모델은 미작성입니다.</b>수익 단가는 정해졌지만 월 고정비, 전환율, 주문량 같은 입력값이 없습니다. 현지 마케팅팀 미팅과 사무실 확보 뒤에 실제 숫자로 채웁니다.</div>
+        <svg class="ic"><use href="#i-doc"/></svg>
+        <div><b>투자 자료도 아직입니다.</b>한국에서 VC 투자를 받을 때 만들던 수준(시장 규모, 재무 추정, 자금 사용 계획)으로는 정리하지 못했습니다. 스타트업이므로 외부 투자는 필요하지만, 그 전에 아래 8장의 단계를 먼저 밟습니다.</div>
+      </div>
+
+      <h3><svg class="ic"><use href="#i-chart"/></svg>손익분기 조건</h3>
+      <div class="formula">
+        <div class="f">월 고정비 ≤ 199 × B + 2 × Q + 99 × A + 12 × M + 9.9 × S + U</div>
+        <ul>
+          <li>B 입점 브랜드 수 · Q 완료 주문 수 · A 광고 집행 업체 수 · M 동네지도 유료 사업자 수 · S 구독자 수 · U 중고마켓 광고 수취액 (단위: 달러)</li>
+        </ul>
+      </div>
+
+      <table class="blk">
+        <thead><tr><th style="width:30%">월 고정비 항목</th><th>현재 상태</th><th>확정 시점</th></tr></thead>
+        <tbody>
+          <tr><th>사무실 임차</th><td data-h="현재 상태">미확정. 회사 명의 소규모 공간 기준</td><td data-h="확정 시점">사무실 계약 후</td></tr>
+          <tr><th>인건비</th><td data-h="현재 상태">미확정. 개발은 직접, 현지 운영 인력은 미정</td><td data-h="확정 시점">현지 채용 계획 확정 후</td></tr>
+          <tr><th>서버·결제 수수료</th><td data-h="현재 상태">미확정. 결제 PG별 수수료율 조사 필요</td><td data-h="확정 시점">PG 계약 후</td></tr>
+          <tr><th>법인 유지·회계·세무</th><td data-h="현재 상태">미확정. 국가별 상이</td><td data-h="확정 시점">법인 설립 국가 확정 후</td></tr>
+          <tr><th>비자·체류</th><td data-h="현재 상태">미확정. 정식 비자 발급 절차 진행 예정</td><td data-h="확정 시점">비자 종류 확정 후</td></tr>
+          <tr><th>마케팅</th><td data-h="현재 상태">미확정. 현지 마케팅팀 미팅으로 단가 확인</td><td data-h="확정 시점">미팅 후</td></tr>
+        </tbody>
+      </table>
+      <p class="caption">모든 항목이 비어 있는 이유는 숫자를 지어내지 않기 위해서입니다. 항목이 채워지는 순서가 곧 다음 장의 우선순위입니다.</p>
+    </section>
+
+    <!-- 8 -->
+    <section class="ch" id="s8">
+      <h2><span class="n">8</span>현재 단계와 우선순위</h2>
+      <p class="lead">투자 유치보다 먼저, 정상적인 신분과 미팅할 수 있는 공간을 만드는 것이 지금의 목표입니다.</p>
+      <ol class="steps">
+        <li>
+          <div>
+            <b><svg class="ic"><use href="#i-idcard"/></svg>정식 비자 발급<span class="now">지금</span></b>
+            <p>정상 신분으로 법인 업무, 계좌 개설, 파트너 미팅을 할 수 있어야 합니다. 비자 종류가 정해지면 7장의 비자·체류 비용이 확정됩니다.</p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <b><svg class="ic"><use href="#i-cup"/></svg>회사 명의의 작은 사무실</b>
+            <p>크지 않아도 됩니다. 회사 이름으로 계약된 공간에서 차를 마시며 미팅할 수 있는 환경이면 충분합니다. 브랜드, 현지 파트너, 마케팅팀을 부를 수 있는 주소가 생깁니다.</p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <b><svg class="ic"><use href="#i-users"/></svg>현지 마케팅팀과 실제 미팅</b>
+            <p>6장의 수익 단가($199, $99, $12, $9.90)를 현지 감각으로 검증합니다. 광고 예산형 구간과 브랜드 계약료는 이 미팅 뒤에 확정합니다.</p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <b><svg class="ic"><use href="#i-scale"/></svg>손익분기 모델 작성</b>
+            <p>사무실과 비자, 미팅으로 확정된 고정비를 넣어 7장의 조건식을 실제 숫자로 채웁니다. 브랜드 몇 곳, 광고 업체 몇 곳이면 고정비를 넘는지 계산합니다.</p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <b><svg class="ic"><use href="#i-doc"/></svg>투자 자료 작성과 투자 유치</b>
+            <p>한국에서 VC 투자를 받을 때의 형식으로 시장 규모, 재무 추정, 자금 사용 계획을 정리합니다. 손익분기 모델이 있어야 설득력이 생깁니다.</p>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <!-- 9 -->
+    <section class="ch wrap-up" id="s9">
+      <h2><span class="n">9</span>정리</h2>
+      <p class="lead">원하는 참여 구조와 추진 방향을 세 가지로 정리합니다.</p>
+      <ol>
+        <li><b>한국 법인 참여와 자회사 설립 담당 구조.</b> 기존 한국 법인((주)XXX)에 참여하여 국내외 자회사 설립과 사업 총괄 담당자를 맡습니다. 한국 영주권(국내 실무·정품 소싱), 10년 이상의 한·중 IT 개발 경력(플랫폼·결제 구축 완료), 중국 국적 기반의 동남아 화교 물류·통관·상공회 네트워크를 결합합니다.</li>
+        <li><b>실속 있는 마진과 깔끔한 자금 흐름.</b> 모회사가 되는 한국 법인과 산하 자회사를 통해 수출 부가세 10% 환급 마진을 확보합니다. 중국 국적 개인 송금의 번거로움 대신 한국 법인 FDI(또는 캄보디아 100% 달러 법인)를 통해 자회사 설립 자금 송금과 수익 회수를 투명하고 편하게 처리합니다.</li>
+        <li><b>국가별 맞춤 자회사 세팅.</b> 100% 지분 확보가 자유로운 캄보디아는 단독 자회사로, 자본금·인허가 장벽이 있는 필리핀(60:40)과 베트남(내국법인 파트너십)은 합작·협력 구조로 직접 챙기며 시간과 초기 비용을 아껴 빠르게 시장에 안착합니다.</li>
+      </ol>
+    </section>
+
+    <footer class="src">
+      <p>원문: 「한·중·동남아 3각 브릿지 포지션 및 한국 법인 참여·자회사 설립 추진 방향」 (Google Docs, 2026년 10월 20일 PDF 출력본)</p>
+      <p>수익 모델: 2026년 10월 18일 이사한 메모. 손익분기·현재 단계: 2026년 10월 20일 추가.</p>
+      <p>금액과 기간은 작성 시점 정보이며, 법인 설립 전 현지 법무·세무 확인이 필요합니다.</p>
+    </footer>
+  </main>
+</div>
+
+</body>
+</html>
